@@ -1,4 +1,4 @@
-<nav class=" position-relative">
+<nav class=" ">
     <p class="text-muted my-3 px-3 fw-bold">Logo</p>
     {{-- <div class=" text-dark px-3"><i class="fa-solid fa-house"></i></div> --}}
     <div class=" text-dark px-3"><i class="fa-solid fa-users"></i></div>
@@ -14,8 +14,8 @@
           </p>
           <div class="collapse px-3" id="collapseExample">
             <ul>
-                <li class="mb-3">User List</li>
-                <li class="mb-3">Create User</li>
+                <li class="mb-3"><a href="{{ route('user#index') }}" class=" text-decoration-none text-secondary">Users List</a></li>
+                <li class="mb-3"><a href="{{ route('user#create') }}" class=" text-decoration-none text-secondary">Create User</a></li>
             </ul>
           </div>
     </div>
@@ -27,7 +27,7 @@
           </p>
           <div class="collapse px-3" id="collapseExample1">
             <ul>
-                <li class="mb-3">Role List</li>
+                <li class="mb-3"><a href="{{ route('role#index') }}" class=" text-decoration-none text-secondary">Role List</a></li>
                 <li class="mb-3"><a href="{{ route('role#create') }}" class=" text-decoration-none text-secondary">Create Role</a></li>
             </ul>
           </div>
