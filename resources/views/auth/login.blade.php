@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Management System</title>
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-6 offset-3 mt-5">
+                <form action="{{ route('login') }}" method="POST" class=" bg-success-subtle rounded p-5">
+                    @csrf
+                    <h3 class="text-center">Login Form</h3>
+                    <div class="col-12 my-3">
+                        <label class="form-label">Email</label>
+                        <input type="text" name="email" value="{{ old('email') }}" class="form-control bg-light" placeholder="username@gmail.com">
+                        @error('email')
+                            <small class=" text-danger">
+                                {{ $message }}
+                            </small>
+                        @enderror
+                    </div>
+                    <div class="col-12 my-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password"  class="form-control bg-light">
+                        @error('password')
+                        <small class=" text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
+                    </div>
+                    <div class="text-center mt-5">
+                        <button type="submit" class="btn btn-success">Create</button>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</html>

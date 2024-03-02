@@ -1,8 +1,4 @@
-<nav class=" ">
-    <p class="text-muted my-3 px-3 fw-bold">Logo</p>
-    {{-- <div class=" text-dark px-3"><i class="fa-solid fa-house"></i></div> --}}
-    <div class=" text-dark px-3"><i class="fa-solid fa-users"></i></div>
-</nav>
+
 {{-- @auth --}}
 <div class="nav-role">
     <p class=" text-muted my-3 px-3 fw-bold">User Management</p>
@@ -22,7 +18,7 @@
     <div>
         <p class="d-inline-flex gap-1 px-3">
             <a class=" text-decoration-none fw-bold" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" >
-                <i class="fa-solid fa-user-gear me-2"></i>Role
+                <i class="fa-solid fa-list me-2"></i></i>Role
             </a>
           </p>
           <div class="collapse px-3" id="collapseExample1">
@@ -31,6 +27,12 @@
                 <li class="mb-3"><a href="{{ route('role#create') }}" class=" text-decoration-none text-secondary">Create Role</a></li>
             </ul>
           </div>
+    </div>
+    <div class="bg-danger-subtle ">
+        <form action="{{ route('logout') }}" method="POST" class="d-inline-flex gap-1 px-1">
+            @csrf
+            <button class=" btn border-0 text-danger fw-bold"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Logout</button>
+        </form>
     </div>
 </div>
 {{-- @endauth --}}

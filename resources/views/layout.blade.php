@@ -11,7 +11,6 @@
 </head>
 <body>
     <div class="d-flex">
-        {{-- @include('components.sidebar') --}}
         <x-sidebar></x-sidebar>
         <div class="content">
             @yield('content')

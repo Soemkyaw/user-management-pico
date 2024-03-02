@@ -27,8 +27,14 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">Edit</a></li>
-                                  <li><a class="dropdown-item" href="#">Delete</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('role#edit',$role) }}">Edit</a></li>
+                                    <li class="">
+                                        <form action="{{ route('role#destory',$role) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="dropdown-item">Delete</button>
+                                        </form>
+                                    </li>
                                 </ul>
                               </div>
                         </td>
