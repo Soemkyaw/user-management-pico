@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class RoleController extends Controller
 {
     // direct role list page
-    public function index(){
+    public function index(Request $request){
         $this->authorize('viewAny',Role::class);
 
-        $roles = Role::all();
+        $roles = Role::where('name','like','%'.$request->key.'%')
+                        ->paginate(10);
         return view('role.index',compact('roles'));
     }
 

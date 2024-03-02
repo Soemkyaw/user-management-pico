@@ -21,7 +21,6 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        // Auth::attempt($loginData)
         if (Auth::attempt($loginData)) {
             return redirect('/');
         }else{

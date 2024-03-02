@@ -11,9 +11,10 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     // direct user list
-    public function index(){
+    public function index(Request $request){
         $this->authorize('viewAny',User::class);
-        $users = User::all();
+        $users = User::where('name','like','%'.$request->key.'%')
+                        ->paginate(5);
         return view('users.list',compact('users'));
     }
 
