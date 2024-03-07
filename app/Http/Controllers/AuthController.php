@@ -24,14 +24,13 @@ class AuthController extends Controller
         if (Auth::attempt($loginData)) {
             return redirect('/');
         }else{
-            dd('error');
+            return redirect()->back()->withErrors(['login' => 'Invalid email or password.']);
         }
     }
 
     public function logout()
     {
         Auth::logout();
-
-        return redirect()->route('login#page');
+        return redirect()->route('login.page');
     }
 }

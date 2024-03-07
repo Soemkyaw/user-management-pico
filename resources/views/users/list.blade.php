@@ -4,15 +4,15 @@
         <div class=" mx-5 my-3 card">
             <div class=" d-flex justify-content-between px-3 my-3">
                 <div class="col-auto">
-                    <form action="{{ route('user#index') }}">
+                    <form action="{{ route('user.index') }}">
                         <input type="text" name="key" class="form-control" placeholder="Search">
                     </form>
                 </div>
-                <a href="{{ route('user#create') }}" class="btn btn-primary"><i class="fa-solid fa-plus me-2"></i>Create User</a>
+                <a href="{{ route('user.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus me-2"></i>Create User</a>
             </div>
             <div class="px-3">
                 <table class="table">
-                    @if ($users->count() == 0)
+                    @if ($userCount === 0)
                         <h3 class="text-secondary text-center my-5">There is no name like <span class="text-danger">"{{ request('key') }}"</span> !</h3>
                     @else
                         <thead>
@@ -34,8 +34,8 @@
                                             <div class=" text-muted">{{ $user->name }}</div>
                                             <div class=" text-muted" style="font-size: 13px">{{ $user->email }}</div>
                                         </span>
-                                        @if (Auth::id() == $user->id)
-                                                <span class="text-success ms-2 bg-success-subtle px-1 rounded">You</span>
+                                        @if (auth()->id() == $user->id)
+                                            <span class="text-success ms-2 bg-success-subtle px-1 rounded">You</span>
                                         @endif
                                     </td>
                                     <td class=" py-3 align-items-center">{{ $user->username }}</td>
@@ -54,10 +54,10 @@
                                             </a>
 
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="{{ route('user#profile',$user) }}">View</a></li>
-                                                <li><a class="dropdown-item" href="{{ route('user#edit',$user) }}">Edit</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('user.show',$user) }}">View</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('user.edit',$user) }}">Edit</a></li>
                                                 <li>
-                                                    <form action="{{ route('user#destory',$user) }}" method="POST">
+                                                    <form action="{{ route('user.destroy',$user) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="dropdown-item">Delete</button>

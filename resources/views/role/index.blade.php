@@ -4,11 +4,11 @@
     <div class=" mx-5 my-3 card">
         <div class=" d-flex justify-content-between px-3 my-3">
             <div class="col-auto">
-                <form action="{{ route('role#index') }}">
+                <form action="{{ route('role.index') }}">
                     <input type="text" name="key" class="form-control" placeholder="Search">
                 </form>
             </div>
-            <a href="{{ route('role#create') }}" class="btn btn-primary"><i class="fa-solid fa-plus me-2"></i>Create Role</a>
+            <a href="{{ route('role.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus me-2"></i>Create Role</a>
         </div>
         <div class="px-3">
             <table class="table table-borderless">
@@ -32,9 +32,9 @@
                                     </a>
 
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{ route('role#edit',$role) }}">Edit</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('role.edit',$role) }}">Edit</a></li>
                                         <li class="">
-                                            <form action="{{ route('role#destory',$role) }}" method="POST">
+                                            <form action="{{ route('role.destroy',$role) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="dropdown-item">Delete</button>

@@ -3,8 +3,8 @@
 @section('content')
     <div class="mx-5 my-3">
         <h3>Create User</h3>
-        <a href="" class="btn btn-light my-2"><i class="fa-solid fa-arrow-left me-1"></i>Back</a>
-        <form action="{{ route('user#store') }}" method="POST" class=" p-3 rounded">
+        <a href="{{ url()->previous() }}" class="btn btn-light my-2"><i class="fa-solid fa-arrow-left me-1"></i>Back</a>
+        <form action="{{ route('user.store') }}" method="POST" class=" p-3 rounded">
           @csrf
 
           {{-- user infomation  --}}

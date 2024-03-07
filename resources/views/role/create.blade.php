@@ -4,7 +4,7 @@
     <div class="mx-5 my-3">
         <h3>Create Role</h3>
         <a href="{{ url()->previous() }}" class="btn btn-light my-2"><i class="fa-solid fa-arrow-left me-1"></i>Back</a>
-        <form action="{{ route('role#store') }}" method="POST" class="bg-white p-3 rounded">
+        <form action="{{ route('role.store') }}" method="POST" class="bg-white p-3 rounded">
           @csrf
           <div class="mb-3">
             <label class="form-label">Role Name</label>

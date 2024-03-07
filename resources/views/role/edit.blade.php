@@ -3,8 +3,8 @@
 @section('content')
     <div class="mx-5 my-3">
         <h3>Create Role</h3>
-        <a href="" class="btn btn-light my-2"><i class="fa-solid fa-arrow-left me-1"></i>Back</a>
-        <form action="{{ route('role#update',$role) }}" method="POST" class="bg-white p-3 rounded">
+        <a href="{{ url()->previous() }}" class="btn btn-light my-2"><i class="fa-solid fa-arrow-left me-1"></i>Back</a>
+        <form action="{{ route('role.update',$role) }}" method="POST" class="bg-white p-3 rounded">
             @csrf
             @method('PUT')
             <div class="mb-3">

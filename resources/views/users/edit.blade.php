@@ -4,7 +4,7 @@
     <div class="mx-5 my-3">
         <h3>Edit User</h3>
         <a href="{{ url()->previous() }}" class="btn btn-light my-2"><i class="fa-solid fa-arrow-left me-1"></i>Back</a>
-        <form action="{{ route('user#update',$user) }}" method="POST" class=" p-3 rounded">
+        <form action="{{ route('user.update',$user) }}" method="POST" class=" p-3 rounded">
             @csrf
             @method('PUT')
           {{-- user infomation  --}}
@@ -40,6 +40,7 @@
             <div class="col-12 mb-3">
                 <label class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" placeholder="Password">
+                <x-error-message name="password"></x-error-message>
             </div>
             <div class="col-12 mb-3">
                 <label class="form-label">Roles</label>

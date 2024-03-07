@@ -5,45 +5,58 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\StoreUserRequest;
 
 class UserController extends Controller
 {
-    // direct user list
-    public function index(Request $request){
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
         $this->authorize('viewAny',User::class);
-        $users = User::where('name','like','%'.$request->key.'%')
-                        ->paginate(5);
-        return view('users.list',compact('users'));
+        $request->validate([
+            'key' => 'nullable|string|max:255',
+        ]);
+        $users = User::where('name','like','%'.$request->key.'%')->paginate(5);
+        $userCount = $users->total();
+        return view('users.list',compact('users','userCount'));
     }
 
-    // show user profile
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $this->authorize('create',User::class);
+        $roles = Role::all();
+        return view('users.create',compact('roles'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreUserRequest $request)
+    {
+        $request->validated();
+        $data = $this->userFormData($request);
+        User::create($data);
+        return redirect()->route('user.index');
+    }
+
+    /**
+     * Display the specified resource.
+     */
     public function show(User $user)
     {
         $this->authorize('view',User::class);
         return view('users.show',compact('user'));
     }
 
-    // direct user create page
-    public function create()
-    {
-
-        $this->authorize('create',User::class);
-        $roles = Role::all();
-        return view('users.create',compact('roles'));
-    }
-
-    // store user-form in db
-    public function store(Request $request)
-    {
-        $this->userFormValidate($request);
-        $data = $this->userFormData($request);
-        User::create($data);
-        return redirect()->route('user#index');
-    }
-
-    // direct to edit page
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(User $user)
     {
         $this->authorize('update',User::class);
@@ -51,37 +64,26 @@ class UserController extends Controller
         return view('users.edit',compact('user','roles'));
     }
 
-    // update
-    public function update(User $user,Request $request)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(StoreUserRequest $request, User $user)
     {
-        $this->userFormValidate($request);
+        $request->validated();
         $data = $this->userFormData($request);
         $user->update($data);
 
-        return redirect()->route('user#index');
+        return redirect()->route('user.index');
     }
 
-    // delete user
-    public function destory(User $user){
-        // dd($user)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(User $user)
+    {
         $this->authorize('delete',User::class);
         $user->delete();
-        return redirect()->route('user#index');
-    }
-
-    // user form validate
-    private function userFormValidate($request)
-    {
-        return $request->validate([
-            'name' => ['required'],
-            'username' => ['required'],
-            'role_id' => ['required'],
-            'phone' => ['required'],
-            'email' => ['required'],
-            'address' => ['required'],
-            'password' => ['required'],
-            'gender' => ['required'],
-        ]);
+        return redirect()->route('user.index');
     }
 
     // user form data

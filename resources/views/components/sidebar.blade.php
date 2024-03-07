@@ -10,8 +10,8 @@
           </p>
           <div class="collapse px-3" id="collapseExample">
             <ul>
-                <li class="mb-3"><a href="{{ route('user#index') }}" class=" text-decoration-none text-secondary">Users List</a></li>
-                <li class="mb-3"><a href="{{ route('user#create') }}" class=" text-decoration-none text-secondary">Create User</a></li>
+                <li class="mb-3"><a href="{{ route('user.index') }}" class=" text-decoration-none text-secondary">Users List</a></li>
+                <li class="mb-3"><a href="{{ route('user.create') }}" class=" text-decoration-none text-secondary">Create User</a></li>
             </ul>
           </div>
     </div>
@@ -23,8 +23,8 @@
           </p>
           <div class="collapse px-3" id="collapseExample1">
             <ul>
-                <li class="mb-3"><a href="{{ route('role#index') }}" class=" text-decoration-none text-secondary">Role List</a></li>
-                <li class="mb-3"><a href="{{ route('role#create') }}" class=" text-decoration-none text-secondary">Create Role</a></li>
+                <li class="mb-3"><a href="{{ route('role.index') }}" class=" text-decoration-none text-secondary">Role List</a></li>
+                <li class="mb-3"><a href="{{ route('role.create') }}" class=" text-decoration-none text-secondary">Create Role</a></li>
             </ul>
           </div>
     </div>

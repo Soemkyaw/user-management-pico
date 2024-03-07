@@ -4,42 +4,61 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\Feature;
-use App\Models\Permission;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreRoleRequest;
 
 class RoleController extends Controller
 {
-    // direct role list page
-    public function index(Request $request){
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
         $this->authorize('viewAny',Role::class);
-
+        $request->validate([
+            'key' => 'nullable|string|max:255',
+        ]);
         $roles = Role::where('name','like','%'.$request->key.'%')
                         ->paginate(10);
         return view('role.index',compact('roles'));
     }
 
-    // dirext create page
-    public function create(){
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
         $this->authorize('create',Role::class);
 
         $features = Feature::get();
         return view('role.create',compact('features'));
     }
 
-    // create
-    public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreRoleRequest $request)
     {
-        $this->FormValidate($request);
-        $data = $this->dbData($request);
+        // dd($request->all());
+        $data = $request->validated();
         $role = Role::create($data);
         if ($request->has('permissions')) {
             $role->permissions()->attach($request->permissions);
         }
-        return redirect()->route('role#index');
+        return redirect()->route('role.index');
     }
 
-    // direct edit page
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(Role $role)
     {
         $this->authorize('update',Role::class);
@@ -47,40 +66,28 @@ class RoleController extends Controller
         return view('role.edit',compact('role','features'));
     }
 
-    // update
-    public function update(Role $role,Request $request)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(StoreRoleRequest $request,Role $role)
     {
-        $this->FormValidate($request);
-        $data = $this->dbData($request);
+        $data = $request->validated();
 
         if ($request->has('permissions')) {
             $role->permissions()->sync($request->permissions);
         }
 
         $role->update($data);
-        return redirect()->route('role#index');
+        return redirect()->route('role.index');
     }
 
-    // delete
-    public function destory(Role $role){
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Role $role)
+    {
         $this->authorize('delete',Role::class);
         $role->delete();
-        return redirect()->route('role#index');
-    }
-
-    //  role form validate
-    private function FormValidate($request)
-    {
-        return $request->validate([
-            'name' => ['required'],
-        ]);
-    }
-
-    // Db data
-    private function dbData($request)
-    {
-        return [
-            'name' => $request->name,
-        ];
+        return redirect()->route('role.index');
     }
 }
