@@ -10,7 +10,7 @@ class Feature extends Model
 {
     use HasFactory;
 
-    public function permission()
+    public function permissions()
     {
         return $this->hasMany(Permission::class);
     }

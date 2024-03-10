@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('viewAny',User::class);
+        $this->authorize('view',User::class);
         $request->validate([
             'key' => 'nullable|string|max:255',
         ]);

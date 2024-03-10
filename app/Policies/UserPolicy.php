@@ -7,20 +7,14 @@ use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return $user->role->permissions->pluck('id')->contains(1);
-    }
 
     /**
      * Determine whether the user can view the model.
      */
     public function view(User $user): bool
     {
-        return $user->role->permissions->pluck('id')->contains(2);
+        // return $user->role->permissions->pluck('id')->contains(1);
+        return $user->hasPermission('View','user');
     }
 
     /**
@@ -28,7 +22,8 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role->permissions->pluck('id')->contains(3);
+        // return $user->role->permissions->pluck('id')->contains(2);
+        return $user->hasPermission('Create','user');
     }
 
     /**
@@ -36,7 +31,8 @@ class UserPolicy
      */
     public function update(User $user): bool
     {
-        return $user->role->permissions->pluck('id')->contains(4);
+        // return $user->role->permissions->pluck('id')->contains(3);
+        return $user->hasPermission('Update','user');
     }
 
     /**
@@ -44,22 +40,8 @@ class UserPolicy
      */
     public function delete(User $user): bool
     {
-        return $user->role->permissions->pluck('id')->contains(5);
+        // return $user->role->permissions->pluck('id')->contains(4);
+        return $user->hasPermission('Delete','user');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, User $model): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, User $model): bool
-    {
-        //
-    }
 }

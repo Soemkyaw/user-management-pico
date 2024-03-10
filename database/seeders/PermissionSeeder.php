@@ -16,7 +16,7 @@ class PermissionSeeder extends Seeder
     {
         //
         $fes = Feature::all();
-        $permissions = ['Select All','View','Create','Update','Delete'];
+        $permissions = ['View','Create','Update','Delete'];
 
         foreach($fes as $f)
         {

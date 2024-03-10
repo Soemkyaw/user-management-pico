@@ -32,7 +32,7 @@
                         @foreach ($features as $feature)
                             <tr>
                                 <td>{{ $feature->name }}</td>
-                                @foreach ($feature->permission as $p)
+                                @foreach ($feature->permissions as $p)
                                     <td>
                                         <input type="checkbox" name="permissions[]" value='{{ $p->id }}'
                                             {{ $role->permissions->pluck('id')->contains($p->id) ? 'checked' : '' }}

@@ -12,7 +12,7 @@
         </div>
         <div class="px-3">
             <table class="table table-borderless">
-                @if ($roles->count() == 0)
+                @if ($roleCount == 0)
                     <h3 class="text-secondary text-center my-5">There is no role like <span class="text-danger">"{{ request('key') }}"</span> !</h3>
                 @else
                 <thead>

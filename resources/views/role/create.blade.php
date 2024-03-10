@@ -26,7 +26,11 @@
                     @foreach ($features as $feature)
                         <tr>
                             <td>{{$feature->name}}</td>
-                            @foreach ($feature->permission as $p)
+                            {{-- <td>
+                                <input type="checkbox" name="permissions[]" value='{{  $feature->permissions->pluck('id') }}' class=" form-check-input">
+                                <label for="">Select All</label>
+                            </td> --}}
+                            @foreach ($feature->permissions as $p)
                                 <td>
                                     <input type="checkbox" name="permissions[]" value='{{$p->id}}' class=" form-check-input">
                                      <label for="">{{ $p->name }}</label>

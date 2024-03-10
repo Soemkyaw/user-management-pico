@@ -14,13 +14,15 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('viewAny',Role::class);
+        $this->authorize('view',Role::class);
         $request->validate([
             'key' => 'nullable|string|max:255',
         ]);
         $roles = Role::where('name','like','%'.$request->key.'%')
                         ->paginate(10);
-        return view('role.index',compact('roles'));
+        $roleCount = $roles->total();
+        // dd($roleCount);
+        return view('role.index',compact('roles','roleCount'));
     }
 
     /**
@@ -62,7 +64,7 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         $this->authorize('update',Role::class);
-        $features = Feature::with('permission')->get();
+        $features = Feature::with('permissions')->get();
         return view('role.edit',compact('role','features'));
     }
 
